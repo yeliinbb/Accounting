@@ -40,7 +40,7 @@ const MonthsList = () => {
         return (
           <MonthBox
             $active={activeIndex === index}
-            key={month}
+            key={month.name}
             onClick={() => handleClick(index)}
           >
             {month.name}

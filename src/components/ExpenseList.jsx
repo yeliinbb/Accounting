@@ -1,10 +1,11 @@
 import Expense from "./Expense";
 
-const ExpenseList = () => {
+const ExpenseList = ({ lists, setLists }) => {
   return (
     <ul>
-      <Expense />
-      <Expense />
+      {lists.map((list) => (
+        <Expense key={list.id} setLists={setLists} list={list} />
+      ))}
     </ul>
   );
 };
