@@ -8,17 +8,19 @@ const Expense = ({ list }) => {
   const { id, date, item, amount, description } = list;
   // const params = useParams();
   return (
-    <Link to={`/detail/${id}`} state={list}>
-      <StLi>
-        <StLiBox>
-          <StLiBoxH3>{date}</StLiBoxH3>
-          <StLiBoxP>
-            {item} - {description}
-          </StLiBoxP>
-        </StLiBox>
-        <StLiSpan>{`${amount}원`}</StLiSpan>
-      </StLi>
-    </Link>
+    <>
+      <Link to={`/detail/${id}`} state={list}>
+        <StLi>
+          <StLiBox>
+            <StLiBoxH3>{date}</StLiBoxH3>
+            <StLiBoxP>
+              {item} - {description}
+            </StLiBoxP>
+          </StLiBox>
+          <StLiSpan>{`${amount}원`}</StLiSpan>
+        </StLi>
+      </Link>
+    </>
   );
 };
 

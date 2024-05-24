@@ -1,11 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  Link,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Detail = ({ lists, setLists }) => {
@@ -13,14 +7,14 @@ const Detail = ({ lists, setLists }) => {
   const location = useLocation();
   const prevData = location.state;
   // const { id } = useParams();
-  // console.log(id);
+  // console.log(location);
   // console.log(lists);
 
   // 수정되는 값 반영을 위한 useRef 사용
-  const dateRef = useRef("");
-  const itemRef = useRef("");
-  const amountRef = useRef("");
-  const descriptionRef = useRef("");
+  const dateRef = useRef(null);
+  const itemRef = useRef(null);
+  const amountRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   const expenseUpdate = () => {
     // 수정 이벤트가 실행될 때 데이터값 가져오기.
@@ -44,8 +38,8 @@ const Detail = ({ lists, setLists }) => {
     console.log("수정완료");
     setLists(updatedList);
     localStorage.setItem("lists", JSON.stringify(updatedList));
-    // window.location.replace("/");
   };
+
   const expenseDelete = () => {
     const deletedList = lists.filter((list) => list.id !== prevData.id);
     if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {

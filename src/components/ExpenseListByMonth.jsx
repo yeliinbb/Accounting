@@ -10,9 +10,11 @@ const ExpenseListByMonth = ({ filteredLists }) => {
 
   return (
     <StUl>
-      {filteredLists.map((list) => (
-        <Expense key={list.id} list={list} />
-      ))}
+      {filteredLists ? (
+        filteredLists.map((list) => <Expense key={list.id} list={list} />)
+      ) : (
+        <div>데이터가 없습니다.</div>
+      )}
     </StUl>
   );
 };
