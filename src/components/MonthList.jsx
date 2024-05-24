@@ -2,36 +2,26 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const MonthNameList = [
-  { name: "January", isClicked: false },
-  { name: "February", isClicked: false },
-  { name: "March", isClicked: false },
-  { name: "April", isClicked: false },
-  { name: "May", isClicked: false },
-  { name: "June", isClicked: false },
-  { name: "July", isClicked: false },
-  { name: "August", isClicked: false },
-  { name: "September", isClicked: false },
-  { name: "October", isClicked: false },
-  { name: "November", isClicked: false },
-  { name: "December", isClicked: false },
-  // "January",
-  // "February",
-  // "March",
-  // "April",
-  // "May",
-  // "June",
-  // "July",
-  // "August",
-  // "September",
-  // "October",
-  // "November",
-  // "December",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-const MonthsList = () => {
+const MonthsList = ({ setMonthFiltered }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const handleClick = (index) => {
     setActiveIndex(index);
+    setMonthFiltered(index);
+    localStorage.setItem("filteredByMonth", index);
   };
 
   return (
@@ -40,10 +30,10 @@ const MonthsList = () => {
         return (
           <MonthBox
             $active={activeIndex === index}
-            key={month.name}
+            key={month}
             onClick={() => handleClick(index)}
           >
-            {month.name}
+            {month}
           </MonthBox>
         );
       })}
