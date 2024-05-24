@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import styled from "styled-components";
 
 const Detail = ({ lists, setLists }) => {
@@ -40,7 +46,18 @@ const Detail = ({ lists, setLists }) => {
     localStorage.setItem("lists", JSON.stringify(updatedList));
     // window.location.replace("/");
   };
-  const expenseDelete = () => {};
+  const expenseDelete = () => {
+    const deletedList = lists.filter((list) => list.id !== prevData.id);
+    confirm("정말로 이 항목을 삭제하시겠습니까?");
+    setLists(deletedList);
+    localStorage.setItem("lists", JSON.stringify(deletedList));
+    localStorage.getItem("filteredByMonth");
+  };
+
+  const navigate = useNavigate();
+  // const onClick = () => {
+  //   navigate("/", {state : })
+  // }
 
   useEffect(() => {
     dateRef.current.focus();
@@ -84,9 +101,11 @@ const Detail = ({ lists, setLists }) => {
             Edit
           </StDetailBtn>
         </Link>
-        <StDetailBtn backgroundcolor="#D9534F" onClick={expenseDelete}>
-          Delete
-        </StDetailBtn>
+        <Link to="/">
+          <StDetailBtn backgroundcolor="#D9534F" onClick={expenseDelete}>
+            Delete
+          </StDetailBtn>
+        </Link>
         <Link to="/">
           <StDetailBtn backgroundcolor="#418bca">Back to Home</StDetailBtn>
         </Link>

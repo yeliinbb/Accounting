@@ -1,8 +1,7 @@
 import uuid from "react-uuid";
 import TextInput from "./TextInput";
-import { useEffect, useRef } from "react";
 
-const Form = ({ setLists, addList }) => {
+const Form = ({ setLists, addList, monthFiltered }) => {
   // 폼이 제출됐을 때 데이터 저장
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -32,7 +31,12 @@ const Form = ({ setLists, addList }) => {
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <TextInput type="date" htmlFor="date" name="date" placeholder="date" />
+      <TextInput
+        type="text"
+        htmlFor="date"
+        name="date"
+        placeholder={`2024-${monthFiltered + 1}-01`}
+      />
       <TextInput type="text" htmlFor="item" name="item" placeholder="item" />
       <TextInput
         type="number"

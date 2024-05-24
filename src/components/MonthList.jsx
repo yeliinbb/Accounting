@@ -17,7 +17,10 @@ const MonthNameList = [
 ];
 
 const MonthsList = ({ setMonthFiltered }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    localStorage.getItem("filteredByMonth") || 0
+  );
+  console.log(activeIndex);
   const handleClick = (index) => {
     setActiveIndex(index);
     setMonthFiltered(index);
