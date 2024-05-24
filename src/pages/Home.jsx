@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import ExpenseListByMonth from "../components/ExpenseListByMonth";
 import Form from "../components/Form";
 import MonthsList from "../components/MonthList";
@@ -20,7 +21,7 @@ const Home = ({ lists, setLists, addList }) => {
       <header>
         <h1>ACCOUNTING BOOK</h1>
       </header>
-      <main>
+      <StMain>
         <Form
           setLists={setLists}
           lists={lists}
@@ -29,9 +30,17 @@ const Home = ({ lists, setLists, addList }) => {
         />
         <MonthsList setMonthFiltered={setMonthFiltered} list={lists} />
         <ExpenseListByMonth filteredLists={filteredLists} />
-      </main>
+      </StMain>
     </>
   );
 };
 
 export default Home;
+
+const StMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+`;

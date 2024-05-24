@@ -48,54 +48,52 @@ const Detail = ({ lists, setLists }) => {
   };
   const expenseDelete = () => {
     const deletedList = lists.filter((list) => list.id !== prevData.id);
-    confirm("정말로 이 항목을 삭제하시겠습니까?");
-    setLists(deletedList);
-    localStorage.setItem("lists", JSON.stringify(deletedList));
-    localStorage.getItem("filteredByMonth");
+    if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
+      setLists(deletedList);
+      localStorage.setItem("lists", JSON.stringify(deletedList));
+      localStorage.getItem("filteredByMonth");
+    } else {
+      alert("삭제가 취소되었습니다.");
+    }
   };
-
-  const navigate = useNavigate();
-  // const onClick = () => {
-  //   navigate("/", {state : })
-  // }
 
   useEffect(() => {
     dateRef.current.focus();
   }, []);
 
   return (
-    <DetailSection>
-      <DetailInputBox>
-        <label htmlFor="detail-date">Date</label>
-        <DetailInput
+    <StDetailSection>
+      <StDetailInputBox>
+        <StDetailLabel htmlFor="detail-date">Date</StDetailLabel>
+        <StDetailInput
           type="date"
           id="detail-date"
           defaultValue={prevData.date}
           ref={dateRef}
         />
-        <label htmlFor="detail-item">Item</label>
-        <DetailInput
+        <StDetailLabel htmlFor="detail-item">Item</StDetailLabel>
+        <StDetailInput
           type="text"
           id="detail-item"
           defaultValue={prevData.item}
           ref={itemRef}
         />
-        <label htmlFor="detail-amount">Amount</label>
-        <DetailInput
+        <StDetailLabel htmlFor="detail-amount">Amount</StDetailLabel>
+        <StDetailInput
           type="number"
           id="detail-amount"
           defaultValue={prevData.amount}
           ref={amountRef}
         />
-        <label htmlFor="detail-description">Details</label>
-        <DetailInput
+        <StDetailLabel htmlFor="detail-description">Details</StDetailLabel>
+        <StDetailInput
           type="text"
           id="detail-description"
           defaultValue={prevData.description}
           ref={descriptionRef}
         />
-      </DetailInputBox>
-      <DetailBtnBox>
+      </StDetailInputBox>
+      <StDetailBtnBox>
         <Link to="/">
           <StDetailBtn backgroundcolor="#F0AD4E" onClick={expenseUpdate}>
             Edit
@@ -109,14 +107,14 @@ const Detail = ({ lists, setLists }) => {
         <Link to="/">
           <StDetailBtn backgroundcolor="#418bca">Back to Home</StDetailBtn>
         </Link>
-      </DetailBtnBox>
-    </DetailSection>
+      </StDetailBtnBox>
+    </StDetailSection>
   );
 };
 
 export default Detail;
 
-const DetailSection = styled.section`
+const StDetailSection = styled.section`
   background-color: #f6f5f4;
   width: 800px;
   padding: 30px;
@@ -127,7 +125,7 @@ const DetailSection = styled.section`
   align-items: flex-end;
 `;
 
-const DetailInputBox = styled.div`
+const StDetailInputBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -135,7 +133,12 @@ const DetailInputBox = styled.div`
   gap: 5px;
 `;
 
-const DetailInput = styled.input`
+const StDetailLabel = styled.label`
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const StDetailInput = styled.input`
   border: 1.5px solid rgba(94, 94, 94, 0.3);
   width: 100%;
   height: 40px;
@@ -144,9 +147,14 @@ const DetailInput = styled.input`
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.4);
   margin-bottom: 10px;
+
+  ::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+    align-content: center;
+  }
 `;
 
-const DetailBtnBox = styled.div`
+const StDetailBtnBox = styled.div`
   display: flex;
   gap: 7px;
 `;
@@ -162,4 +170,10 @@ const StDetailBtn = styled.button`
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.8);
+    /* opacity: 0.8; */
+    transition: 0.3s;
+  }
 `;

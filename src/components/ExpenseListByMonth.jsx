@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Expense from "./Expense";
 
 const ExpenseListByMonth = ({ filteredLists }) => {
@@ -8,12 +9,24 @@ const ExpenseListByMonth = ({ filteredLists }) => {
   // });
 
   return (
-    <ul>
+    <StUl>
       {filteredLists.map((list) => (
         <Expense key={list.id} list={list} />
       ))}
-    </ul>
+    </StUl>
   );
 };
 
 export default ExpenseListByMonth;
+
+const StUl = styled.ul`
+  background-color: #f6f5f4;
+  width: 1200px;
+  display: grid;
+  /* grid-template-rows: repeat(auto-fit,minmax(70px, 1fr)); */
+  grid-auto-rows: minmax(80px, auto);
+  gap: 10px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  border-radius: 15px;
+`;

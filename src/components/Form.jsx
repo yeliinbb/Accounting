@@ -1,5 +1,6 @@
 import uuid from "react-uuid";
 import TextInput from "./TextInput";
+import styled from "styled-components";
 
 const Form = ({ setLists, addList, monthFiltered }) => {
   // 폼이 제출됐을 때 데이터 저장
@@ -29,13 +30,15 @@ const Form = ({ setLists, addList, monthFiltered }) => {
     event.target.reset();
   };
 
+  const month = ("0" + (monthFiltered + 1)).slice(-2);
+
   return (
-    <form onSubmit={onSubmitHandler}>
+    <StFrom onSubmit={onSubmitHandler}>
       <TextInput
         type="text"
         htmlFor="date"
         name="date"
-        placeholder={`2024-${monthFiltered + 1}-01`}
+        placeholder={`2024-${month}-01`}
       />
       <TextInput type="text" htmlFor="item" name="item" placeholder="item" />
       <TextInput
@@ -50,9 +53,38 @@ const Form = ({ setLists, addList, monthFiltered }) => {
         name="description"
         placeholder="description"
       />
-      <button type="submit">Save</button>
-    </form>
+      <StBtn type="submit">Save</StBtn>
+    </StFrom>
   );
 };
 
 export default Form;
+
+const StFrom = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f5f4;
+  width: 1200px;
+  padding: 30px 50px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  gap: 20px;
+`;
+
+const StBtn = styled.button`
+  background-color: #78866b;
+  color: #f8f2eb;
+  border: 0;
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+  }
+`;
