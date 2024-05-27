@@ -1,19 +1,16 @@
 import styled from "styled-components";
 import Expense from "./Expense";
 
-const ExpenseListByMonth = ({ filteredLists }) => {
-  // 맞다면 클릭했을 때 해당 달 내역만 화면에 보여주기
-  // const filteredList = lists.filter((list, index) => {
-  //   console.log(list);
-  //   return list[date].getMonth() === monthFiltered;
-  // });
-
+const ExpenseListByMonth = ({ filteredLists = [] }) => {
+  // console.log(filteredLists);
   return (
     <StUl>
-      {filteredLists ? (
+      {filteredLists.length > 0 ? (
         filteredLists.map((list) => <Expense key={list.id} list={list} />)
       ) : (
-        <div>데이터가 없습니다.</div>
+        <StNoExpenseWrapper>
+          <StNoExpenseBox>지출이 없습니다.</StNoExpenseBox>
+        </StNoExpenseWrapper>
       )}
     </StUl>
   );
@@ -31,4 +28,20 @@ const StUl = styled.ul`
   padding: 20px 30px;
   box-sizing: border-box;
   border-radius: 15px;
+`;
+
+const StNoExpenseWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StNoExpenseBox = styled.span`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #dbe1d9;
+  text-align: center;
+  align-content: center;
+  font-size: 16px;
 `;

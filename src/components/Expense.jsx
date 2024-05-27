@@ -1,12 +1,12 @@
 // Link로 개별 디테일 페이지 이동
 // useParams와 아이디 사용 필요
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Expense = ({ list }) => {
   const { id, date, item, amount, description } = list;
-  // const params = useParams();
+
   return (
     <>
       <Link to={`/detail/${id}`} state={list}>
@@ -49,21 +49,25 @@ const StLi = styled.li`
 const StLiBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
 `;
 
 const StLiBoxH3 = styled.h3`
-  color: #f8f2eb;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
+  /* color: #f8f2eb; */
+  /* color: #b4b4b4; */
 `;
 
 const StLiBoxP = styled.p`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 17px;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
 const StLiSpan = styled.span`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
 `;

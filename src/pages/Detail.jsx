@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Detail = ({ lists, setLists }) => {
@@ -18,7 +18,7 @@ const Detail = ({ lists, setLists }) => {
 
   const expenseUpdate = () => {
     // 수정 이벤트가 실행될 때 데이터값 가져오기.
-    // 안에서 정의해줘야 수정된 데이터 값을 사용할 수 있음.
+    // 함수 안에서 정의해줘야 수정된 데이터 값을 사용할 수 있음.
     const updatedDate = dateRef.current.value;
     const updatedItem = itemRef.current.value;
     const updatedAmount = amountRef.current.value;
