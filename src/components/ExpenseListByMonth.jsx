@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import Expense from "./Expense";
+import { ExpenseContext } from "../context/ExpenseContext";
+import { useContext } from "react";
 
-const ExpenseListByMonth = ({ filteredLists = [] }) => {
+const ExpenseListByMonth = () => {
+  const { filteredLists = [] } = useContext(ExpenseContext);
   // console.log(filteredLists);
   return (
     <StUl>

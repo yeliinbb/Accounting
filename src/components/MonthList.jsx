@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { ExpenseContext } from "../context/ExpenseContext";
 
 const MonthNameList = [
   "January",
@@ -16,7 +17,9 @@ const MonthNameList = [
   "December",
 ];
 
-const MonthsList = ({ setMonthFiltered }) => {
+const MonthsList = () => {
+  const { setMonthFiltered } = useContext(ExpenseContext);
+
   const [activeIndex, setActiveIndex] = useState(
     parseInt(localStorage.getItem("filteredByMonth")) || null
   );

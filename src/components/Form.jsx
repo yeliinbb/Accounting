@@ -1,8 +1,12 @@
 import uuid from "react-uuid";
 import TextInput from "./TextInput";
 import styled from "styled-components";
+import { useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
 
-const Form = ({ setLists, addList, monthFiltered }) => {
+const Form = () => {
+  const { setLists, addList, monthFiltered } = useContext(ExpenseContext);
+
   // 폼이 제출됐을 때 데이터 저장
   const onSubmitHandler = (event) => {
     event.preventDefault();

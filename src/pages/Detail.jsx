@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { ExpenseContext } from "../context/ExpenseContext";
 
-const Detail = ({ lists, setLists }) => {
+const Detail = () => {
+  const { lists, setLists } = useContext(ExpenseContext);
+
   // 기존 데이터 가져오기
   const location = useLocation();
   const prevData = location.state;
-  // const { id } = useParams();
   // console.log(location);
   // console.log(lists);
 
