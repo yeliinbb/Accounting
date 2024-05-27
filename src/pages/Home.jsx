@@ -24,11 +24,10 @@ const Home = ({ lists, setLists, addList }) => {
       <StMain>
         <Form
           setLists={setLists}
-          lists={lists}
           addList={addList}
           monthFiltered={monthFiltered}
         />
-        <MonthsList setMonthFiltered={setMonthFiltered} list={lists} />
+        <MonthsList setMonthFiltered={setMonthFiltered} />
         <ExpenseListByMonth filteredLists={filteredLists} />
       </StMain>
     </>
