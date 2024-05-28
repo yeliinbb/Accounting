@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ExpenseContext } from "../context/ExpenseContext";
+import { useDispatch } from "react-redux";
+import { setMonth } from "../redux/slices/monthFilteredSlice";
 
 const MonthNameList = [
   "January",
@@ -18,7 +19,7 @@ const MonthNameList = [
 ];
 
 const MonthsList = () => {
-  const { setMonthFiltered } = useContext(ExpenseContext);
+  const dispatch = useDispatch();
 
   const [activeIndex, setActiveIndex] = useState(
     parseInt(localStorage.getItem("filteredByMonth")) || null
@@ -28,14 +29,17 @@ const MonthsList = () => {
   // setMonthfiltered에 activeIndex 넣어 화면에 그려주기
   useEffect(() => {
     if (activeIndex !== 0) {
-      setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
+      // setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
+      const filteredMonth = JSON.parse(localStorage.getItem("filteredByMonth"));
+      dispatch(setMonth(parseInt(filteredMonth)));
     }
   }, []);
 
   // 클릭했을 때 해당 달 내역만 화면에 보여주기 위해 index 사용
   const handleClick = (index) => {
     setActiveIndex(index);
-    setMonthFiltered(index);
+    // setMonthFiltered(index);
+    dispatch(setMonth(index));
     localStorage.setItem("filteredByMonth", index);
   };
 

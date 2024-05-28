@@ -1,15 +1,23 @@
 // Link로 개별 디테일 페이지 이동
 // useParams와 아이디 사용 필요
 
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const Expense = ({ list }) => {
-  const { id, date, item, amount, description } = list;
+const Expense = () => {
+  const filteredExpense = useSelector(
+    (state) => state.filteredExpense.filtered
+  );
+  const expenseList = useSelector((state) => state.expenseList);
+  const { date, item, amount, description } = expenseList;
+  console.log(filteredExpense);
+  const { id } = useParams();
+  console.log(id);
 
   return (
     <>
-      <Link to={`/detail/${id}`} state={list}>
+      <Link to={`/detail/${id}`} state={expenseList}>
         <StLi>
           <StLiBox>
             <StLiBoxH3>{date}</StLiBoxH3>
