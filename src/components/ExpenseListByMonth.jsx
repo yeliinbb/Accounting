@@ -19,7 +19,7 @@ const ExpenseListByMonth = () => {
     const filtered = expenseList.filter(
       (list) => new Date(list.date).getMonth() === monthFiltered
     );
-    console.log("filtered => ", filtered);
+    // console.log("filtered => ", filtered);
     dispatch(setFilteredExpense(filtered));
   }, [expenseList, monthFiltered]);
 

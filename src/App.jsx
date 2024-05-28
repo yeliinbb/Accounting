@@ -10,8 +10,9 @@ const App = () => {
   // const dispatch = useDispatch();
   // 컴포넌트가 마운트될 때 로컬스토리지에서 값을 가져오기
   useEffect(() => {
-    const savedLists = JSON.parse(localStorage.getItem("lists")) || [];
-    console.log("savedLists =>", savedLists);
+    JSON.parse(localStorage.getItem("lists")) || [];
+    // const savedLists = JSON.parse(localStorage.getItem("lists")) || [];
+    // console.log("savedLists =>", savedLists);
     // dispatch(setExpenseList(...savedLists));
   }, []);
 

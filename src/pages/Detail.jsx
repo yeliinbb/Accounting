@@ -1,16 +1,17 @@
 import { useContext, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { ExpenseContext } from "../context/ExpenseContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { deleteExpense, updateExpense } from "../redux/slices/expenseSlice";
 
 const Detail = () => {
-  const { lists, setLists } = useContext(ExpenseContext);
-
+  const dispatch = useDispatch();
+  const expenseList = useSelector((state) => state.expenseList);
+  const params = useParams();
   // 기존 데이터 가져오기
-  const location = useLocation();
-  const prevData = location.state;
-  // console.log(location);
-  // console.log(lists);
+  const prevData = expenseList.find((item) => item.id === params.id);
+  console.log("prevData => ", prevData);
 
   // 수정되는 값 반영을 위한 useRef 사용
   const dateRef = useRef(null);
@@ -26,27 +27,25 @@ const Detail = () => {
     const updatedAmount = amountRef.current.value;
     const updatedDescription = descriptionRef.current.value;
 
-    const updatedList = lists.map((list) =>
-      list.id === prevData.id
-        ? {
-            ...list,
-            date: updatedDate,
-            item: updatedItem,
-            amount: Number(updatedAmount),
-            description: updatedDescription,
-          }
-        : list
-    );
-    console.log("수정완료");
-    setLists(updatedList);
-    localStorage.setItem("lists", JSON.stringify(updatedList));
+    const updatedList = {
+      id: prevData.id,
+      date: updatedDate,
+      item: updatedItem,
+      amount: Number(updatedAmount),
+      description: updatedDescription,
+    };
+    // console.log("updatedList => ", updatedList);
+    // console.log("수정완료");
+    dispatch(updateExpense(updatedList));
+    const updated = [updatedList, ...expenseList];
+    // localStorage.setItem("lists", JSON.stringify(updated));
   };
 
   const expenseDelete = () => {
-    const deletedList = lists.filter((list) => list.id !== prevData.id);
+    const deletedList = expenseList.filter((list) => list.id !== prevData.id);
     if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
-      setLists(deletedList);
-      localStorage.setItem("lists", JSON.stringify(deletedList));
+      dispatch(deleteExpense(prevData));
+      // localStorage.setItem("lists", JSON.stringify(deletedList));
       localStorage.getItem("filteredByMonth");
     } else {
       alert("삭제가 취소되었습니다.");
