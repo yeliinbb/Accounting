@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     // JSON.parse(localStorage.getItem("lists")) || [];
     const savedLists = JSON.parse(localStorage.getItem("lists")) || [];
-    console.log("savedLists =>", savedLists);
+    // console.log("savedLists =>", savedLists);
     // if (expenseList) {
     //   dispatch(setExpenseList(...savedLists));
     // }

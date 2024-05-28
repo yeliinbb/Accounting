@@ -8,17 +8,16 @@ const expenseSlice = createSlice({
   initialState,
   reducers: {
     setExpenseList: (state, action) => {
-      console.log("state0 => ", state);
-      console.log("action.payload0 => ", action.payload);
+      // console.log("state0 => ", state);
+      // console.log("action.payload0 => ", action.payload);
       return [action.payload, ...state];
-      // return [action.payload];
-      // localStorage.setItem("lists", JSON.stringify(state));
     },
-    // addExpense: (state, action) => {
-    //   const updatedExpense = [action.payload, ...state];
-    //   localStorage.setItem("lists", JSON.stringify(updatedExpense));
-    //   return updateExpense;
-    // },
+    addExpense: (state, action) => {
+      state.unshift(action.payload);
+      localStorage.setItem("lists", JSON.stringify(state));
+      // const add = [action.payload, ...state];
+      // localStorage.setItem("lists", JSON.stringify(add));
+    },
     updateExpense: (state, action) => {
       const { id, date, item, amount, description } = action.payload;
       const updatedExpense = state.find((expense) => expense.id === id);
@@ -29,7 +28,6 @@ const expenseSlice = createSlice({
         updatedExpense.amount = amount;
         updatedExpense.description = description;
       }
-      // console.log(state);
       localStorage.setItem("lists", JSON.stringify(state));
     },
     deleteExpense: (state, action) => {
@@ -38,7 +36,6 @@ const expenseSlice = createSlice({
       const deletedExpenseLists = deletedExpense
         ? state.filter((expense) => expense.id !== id)
         : state;
-      // console.log("deletedExpenseLists =>", deletedExpenseLists);
       localStorage.setItem("lists", JSON.stringify(deletedExpenseLists));
       return [...deletedExpenseLists];
     },
@@ -46,7 +43,6 @@ const expenseSlice = createSlice({
       const filtered = state.filter(
         (expense) => new Date(expense.date).getMonth() === action.payload
       );
-      // console.log(filtered);
       state = [...filtered];
     },
   },

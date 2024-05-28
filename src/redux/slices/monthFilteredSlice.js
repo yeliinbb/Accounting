@@ -5,8 +5,7 @@ const monthFilteredSlice = createSlice({
   initialState: parseInt(localStorage.getItem("filteredByMonth")),
   reducers: {
     setMonth: (state, action) => {
-      //   console.log(state.monthFiltered);
-      console.log("action.payload1 => ", action.payload);
+      // console.log("action.payload1 => ", action.payload);
       return action.payload;
     },
   },
