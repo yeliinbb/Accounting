@@ -11,8 +11,14 @@ const expenseSlice = createSlice({
       console.log("state0 => ", state);
       console.log("action.payload0 => ", action.payload);
       return [action.payload, ...state];
+      // return [action.payload];
       // localStorage.setItem("lists", JSON.stringify(state));
     },
+    // addExpense: (state, action) => {
+    //   const updatedExpense = [action.payload, ...state];
+    //   localStorage.setItem("lists", JSON.stringify(updatedExpense));
+    //   return updateExpense;
+    // },
     updateExpense: (state, action) => {
       const { id, date, item, amount, description } = action.payload;
       const updatedExpense = state.find((expense) => expense.id === id);
@@ -29,18 +35,28 @@ const expenseSlice = createSlice({
     deleteExpense: (state, action) => {
       const { id } = action.payload;
       const deletedExpense = state.find((expense) => expense.id === id);
-      // if (deletedExpense) {
-      //   return state.filter((expense) => expense.id !== id);
-      // }
       const deletedExpenseLists = deletedExpense
         ? state.filter((expense) => expense.id !== id)
         : state;
       // console.log("deletedExpenseLists =>", deletedExpenseLists);
       localStorage.setItem("lists", JSON.stringify(deletedExpenseLists));
+      return [...deletedExpenseLists];
+    },
+    filterExpense: (state, action) => {
+      const filtered = state.filter(
+        (expense) => new Date(expense.date).getMonth() === action.payload
+      );
+      // console.log(filtered);
+      state = [...filtered];
     },
   },
 });
 
-export const { setExpenseList, updateExpense, deleteExpense } =
-  expenseSlice.actions;
+export const {
+  setExpenseList,
+  updateExpense,
+  deleteExpense,
+  filterExpense,
+  addExpense,
+} = expenseSlice.actions;
 export default expenseSlice.reducer;

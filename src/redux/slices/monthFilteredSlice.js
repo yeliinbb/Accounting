@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const monthFilteredSlice = createSlice({
   name: "monthFiltered",
-  initialState: 0,
+  initialState: parseInt(localStorage.getItem("filteredByMonth")),
   reducers: {
-    setMonth: (state = initialState, action) => {
+    setMonth: (state, action) => {
       //   console.log(state.monthFiltered);
-      // console.log("action.payload1 => ", action.payload);
+      console.log("action.payload1 => ", action.payload);
       return action.payload;
     },
   },

@@ -2,7 +2,7 @@ import uuid from "react-uuid";
 import TextInput from "./TextInput";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setExpenseList } from "../redux/slices/expenseSlice";
+import { addExpense, setExpenseList } from "../redux/slices/expenseSlice";
 
 const Form = () => {
   const monthFiltered = useSelector((state) => state.monthFiltered);
@@ -12,10 +12,14 @@ const Form = () => {
   // // 새로운 리스트를 추가하는 함수
   const addList = (newList) => {
     const updateLists = [newList, ...expenseList];
-    console.log("updateLists => ", updateLists);
-    dispatch(setExpenseList(...updateLists));
+    // console.log("updateLists => ", updateLists);
     localStorage.setItem("lists", JSON.stringify(updateLists));
+    dispatch(setExpenseList(...updateLists));
   };
+
+  // const addList = (newList) => {
+  //   dispatch(addExpense(newList));
+  // };
 
   // 폼이 제출됐을 때 데이터 저장
   const onSubmitHandler = (event) => {
@@ -37,10 +41,11 @@ const Form = () => {
 
     if (!date || !item || !amount || !description) {
       alert("내용을 모두 입력해주세요.");
-    } else alert("내용이 입력됐습니다.");
-
-    addList(nextList);
-    event.target.reset();
+    } else {
+      alert("내용이 입력됐습니다.");
+      addList(nextList);
+      event.target.reset();
+    }
   };
 
   const month = ("0" + (monthFiltered + 1)).slice(-2);

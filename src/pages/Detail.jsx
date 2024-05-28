@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -34,18 +34,12 @@ const Detail = () => {
       amount: Number(updatedAmount),
       description: updatedDescription,
     };
-    // console.log("updatedList => ", updatedList);
-    // console.log("수정완료");
     dispatch(updateExpense(updatedList));
-    const updated = [updatedList, ...expenseList];
-    // localStorage.setItem("lists", JSON.stringify(updated));
   };
 
   const expenseDelete = () => {
-    const deletedList = expenseList.filter((list) => list.id !== prevData.id);
     if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
       dispatch(deleteExpense(prevData));
-      // localStorage.setItem("lists", JSON.stringify(deletedList));
       localStorage.getItem("filteredByMonth");
     } else {
       alert("삭제가 취소되었습니다.");

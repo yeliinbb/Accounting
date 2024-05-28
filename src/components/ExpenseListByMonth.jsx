@@ -1,32 +1,28 @@
 import styled from "styled-components";
 import Expense from "./Expense";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilteredExpense } from "../redux/slices/filteredExpenseSlice";
 import { useEffect } from "react";
+import { filterExpense } from "../redux/slices/expenseSlice";
 
 const ExpenseListByMonth = () => {
   const expenseList = useSelector((state) => state.expenseList);
   const monthFiltered = useSelector((state) => state.monthFiltered);
-  const filteredExpense = useSelector(
-    (state) => state.filteredExpense.filtered
-  );
-
   const dispatch = useDispatch();
 
   // 저장된 로컬스토리지 lists 데이터 중에서 선택한 달과 맞는 데이터 가져오기 -> getMonth()
+  const filtered = expenseList.filter(
+    (list) => new Date(list.date).getMonth() === monthFiltered
+  );
+  // console.log("filtered => ", filtered);
+
   useEffect(() => {
-    // console.log("expenseList => ", expenseList);
-    const filtered = expenseList.filter(
-      (list) => new Date(list.date).getMonth() === monthFiltered
-    );
-    // console.log("filtered => ", filtered);
-    dispatch(setFilteredExpense(filtered));
-  }, [expenseList, monthFiltered]);
+    dispatch(filterExpense(monthFiltered));
+  }, []);
 
   return (
     <StUl>
-      {filteredExpense.length > 0 ? (
-        filteredExpense.map((list) => <Expense key={list.id} expense={list} />)
+      {filtered.length > 0 ? (
+        filtered.map((list) => <Expense key={list.id} expense={list} />)
       ) : (
         <StNoExpenseWrapper>
           <StNoExpenseBox>지출이 없습니다.</StNoExpenseBox>
