@@ -22,14 +22,15 @@ const MonthsList = () => {
   const dispatch = useDispatch();
 
   const [activeIndex, setActiveIndex] = useState(
-    parseInt(localStorage.getItem("filteredByMonth")) || null
+    parseInt(localStorage.getItem("filteredByMonth")) || 0
   );
+
+  // console.log(activeIndex);
 
   // useState의 상태가 0이 아닐 경우 로컬스토리지에서 데이터를 가져와서
   // setMonthfiltered에 activeIndex 넣어 화면에 그려주기
   useEffect(() => {
     if (activeIndex !== 0) {
-      // setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
       const filteredMonth = JSON.parse(localStorage.getItem("filteredByMonth"));
       dispatch(setMonth(parseInt(filteredMonth)));
     }
@@ -38,7 +39,6 @@ const MonthsList = () => {
   // 클릭했을 때 해당 달 내역만 화면에 보여주기 위해 index 사용
   const handleClick = (index) => {
     setActiveIndex(index);
-    // setMonthFiltered(index);
     dispatch(setMonth(index));
     localStorage.setItem("filteredByMonth", index);
   };

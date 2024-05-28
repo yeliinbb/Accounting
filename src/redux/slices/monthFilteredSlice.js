@@ -6,7 +6,7 @@ const monthFilteredSlice = createSlice({
   reducers: {
     setMonth: (state = initialState, action) => {
       //   console.log(state.monthFiltered);
-      //   console.log("action.payload1 => ", action.payload);
+      // console.log("action.payload1 => ", action.payload);
       return action.payload;
     },
   },

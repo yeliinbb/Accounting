@@ -13,7 +13,7 @@ const Form = () => {
   const addList = (newList) => {
     const updateLists = [newList, ...expenseList];
     console.log("updateLists => ", updateLists);
-    dispatch(setExpenseList(newList));
+    dispatch(setExpenseList(...updateLists));
     localStorage.setItem("lists", JSON.stringify(updateLists));
   };
 
@@ -39,8 +39,6 @@ const Form = () => {
       alert("내용을 모두 입력해주세요.");
     } else alert("내용이 입력됐습니다.");
 
-    // setLists((prevList) => [nextList, ...prevList]);
-    // dispatch(setExpenseList(nextList));
     addList(nextList);
     event.target.reset();
   };

@@ -5,19 +5,11 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const Expense = () => {
-  const filteredExpense = useSelector(
-    (state) => state.filteredExpense.filtered
-  );
-  const expenseList = useSelector((state) => state.expenseList);
-  const { date, item, amount, description } = expenseList;
-  console.log(filteredExpense);
-  const { id } = useParams();
-  console.log(id);
-
+const Expense = ({ expense }) => {
+  const { id, date, item, amount, description } = expense;
   return (
     <>
-      <Link to={`/detail/${id}`} state={expenseList}>
+      <Link to={`/detail/${id}`}>
         <StLi>
           <StLiBox>
             <StLiBoxH3>{date}</StLiBoxH3>
