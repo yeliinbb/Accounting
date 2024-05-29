@@ -15,13 +15,8 @@ const App = () => {
   }, []);
 
   // // 새로운 리스트를 추가하는 함수
-  const addList = (newList) => {
-    // setLists((prevLists) => {
-    //   const updatedLists = [...prevLists, newList];
-    //   localStorage.setItem("inputs", JSON.stringify(updatedLists));
-    //   return updatedLists;
-    // });
-    const updateLists = [newList, ...lists];
+  const addList = (nextList) => {
+    const updateLists = [nextList, ...lists];
     setLists(updateLists);
     localStorage.setItem("lists", JSON.stringify(updateLists));
   };
