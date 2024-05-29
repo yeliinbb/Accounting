@@ -21,16 +21,6 @@ const GlobalStyle = createGlobalStyle`
         justify-content: center;
     }
 
-    /* #root {
-        background-color: #B4C4B1;
-        margin: 0 auto;
-        padding: 30px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    } */
-
     header {
         background-color: #f6f5f4;
         width: 1200px;

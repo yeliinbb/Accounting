@@ -1,6 +1,3 @@
-// Link로 개별 디테일 페이지 이동
-// useParams와 아이디 사용 필요
-
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
