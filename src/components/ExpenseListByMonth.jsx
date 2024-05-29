@@ -9,11 +9,10 @@ const ExpenseListByMonth = () => {
   const monthFiltered = useSelector((state) => state.monthFiltered);
   const dispatch = useDispatch();
 
-  // 저장된 로컬스토리지 lists 데이터 중에서 선택한 달과 맞는 데이터 가져오기 -> getMonth()
+  // 저장된 데이터 중에서 선택한 달과 맞는 데이터 가져오기 -> getMonth()
   const filtered = expenseList.filter(
-    (list) => new Date(list.date).getMonth() === monthFiltered
+    (expense) => new Date(expense.date).getMonth() === monthFiltered
   );
-  // console.log("filtered => ", filtered);
 
   useEffect(() => {
     dispatch(filterExpense(monthFiltered));

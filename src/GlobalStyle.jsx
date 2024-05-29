@@ -21,16 +21,6 @@ const GlobalStyle = createGlobalStyle`
         justify-content: center;
     }
 
-    /* #root {
-        background-color: #B4C4B1;
-        margin: 0 auto;
-        padding: 30px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    } */
-
     header {
         background-color: #f6f5f4;
         width: 1200px;
@@ -47,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 45px;
         font-weight: 600;
     }
-
+    /* Link 컴포넌트 텍스트 밑줄 제거 */
      a {
         text-decoration: none;
      }

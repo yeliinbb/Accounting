@@ -8,9 +8,9 @@ const Form = () => {
   const monthFiltered = useSelector((state) => state.monthFiltered);
   const dispatch = useDispatch();
 
-  // // 새로운 리스트를 추가하는 함수
-  const addList = (newList) => {
-    dispatch(addExpense(newList));
+  // 새로운 리스트를 추가하는 함수
+  const addList = (nextList) => {
+    dispatch(addExpense(nextList));
   };
 
   // 폼이 제출됐을 때 데이터 저장

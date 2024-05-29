@@ -9,9 +9,8 @@ const Detail = () => {
   const dispatch = useDispatch();
   const expenseList = useSelector((state) => state.expenseList);
   const params = useParams();
-  // 기존 데이터 가져오기
+  // 기존 데이터 가져와서 각각 defaultValue에 넣어주기
   const prevData = expenseList.find((item) => item.id === params.id);
-  // console.log("prevData => ", prevData);
 
   // 수정되는 값 반영을 위한 useRef 사용
   const dateRef = useRef(null);

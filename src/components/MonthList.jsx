@@ -22,6 +22,7 @@ const MonthsList = () => {
   const dispatch = useDispatch();
   const monthFiltered = useSelector((state) => state.monthFiltered);
 
+  // 새로고침됐을 때 로컬스토지지에 있는 선택된 달에 맞는 데이터 가져오기
   useEffect(() => {
     if (monthFiltered) {
       const filteredMonth = JSON.parse(localStorage.getItem("filteredByMonth"));
