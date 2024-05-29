@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Detail = ({ lists, setLists }) => {
@@ -8,7 +8,9 @@ const Detail = ({ lists, setLists }) => {
   const prevData = location.state;
   // console.log(location);
   // console.log(lists);
+  const navigate = useNavigate();
 
+  // 유효성 검사를 하려면 useState 동기적 컴포넌트? 사용
   // 수정되는 값 반영을 위한 useRef 사용
   const dateRef = useRef(null);
   const itemRef = useRef(null);
@@ -36,6 +38,7 @@ const Detail = ({ lists, setLists }) => {
     );
     console.log("수정완료");
     setLists(updatedList);
+    navigate("/");
     localStorage.setItem("lists", JSON.stringify(updatedList));
   };
 
@@ -87,19 +90,26 @@ const Detail = ({ lists, setLists }) => {
         />
       </StDetailInputBox>
       <StDetailBtnBox>
-        <Link to="/">
-          <StDetailBtn backgroundcolor="#F0AD4E" onClick={expenseUpdate}>
-            Edit
-          </StDetailBtn>
-        </Link>
+        {/* <Link to="/"> */}
+        <StDetailBtn backgroundcolor="#F0AD4E" onClick={expenseUpdate}>
+          Edit
+        </StDetailBtn>
+        {/* </Link> */}
         <Link to="/">
           <StDetailBtn backgroundcolor="#D9534F" onClick={expenseDelete}>
             Delete
           </StDetailBtn>
         </Link>
-        <Link to="/">
-          <StDetailBtn backgroundcolor="#418bca">Back to Home</StDetailBtn>
-        </Link>
+        {/* <Link to="/"> */}
+        <StDetailBtn
+          onClick={() => {
+            navigate(-1);
+          }}
+          backgroundcolor="#418bca"
+        >
+          Back to Home
+        </StDetailBtn>
+        {/* </Link> */}
       </StDetailBtnBox>
     </StDetailSection>
   );
