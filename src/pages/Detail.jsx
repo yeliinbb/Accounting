@@ -11,7 +11,7 @@ const Detail = () => {
   const params = useParams();
   // 기존 데이터 가져오기
   const prevData = expenseList.find((item) => item.id === params.id);
-  console.log("prevData => ", prevData);
+  // console.log("prevData => ", prevData);
 
   // 수정되는 값 반영을 위한 useRef 사용
   const dateRef = useRef(null);
@@ -84,17 +84,17 @@ const Detail = () => {
       </StDetailInputBox>
       <StDetailBtnBox>
         <Link to="/">
-          <StDetailBtn backgroundcolor="#F0AD4E" onClick={expenseUpdate}>
+          <StDetailBtn $backgroundColor="#F0AD4E" onClick={expenseUpdate}>
             Edit
           </StDetailBtn>
         </Link>
         <Link to="/">
-          <StDetailBtn backgroundcolor="#D9534F" onClick={expenseDelete}>
+          <StDetailBtn $backgroundColor="#D9534F" onClick={expenseDelete}>
             Delete
           </StDetailBtn>
         </Link>
         <Link to="/">
-          <StDetailBtn backgroundcolor="#418bca">Back to Home</StDetailBtn>
+          <StDetailBtn $backgroundColor="#418bca">Back to Home</StDetailBtn>
         </Link>
       </StDetailBtnBox>
     </StDetailSection>
@@ -149,7 +149,7 @@ const StDetailBtnBox = styled.div`
 `;
 
 const StDetailBtn = styled.button`
-  background-color: ${(props) => props.backgroundcolor};
+  background-color: ${(props) => props.backgroundColor};
   color: #f8f2eb;
   border: 0;
   width: max-content;
@@ -166,3 +166,15 @@ const StDetailBtn = styled.button`
     transition: 0.3s;
   }
 `;
+
+// const StDetailBtnFirst = styled(StDetailBtn)`
+//   background-color: #f0ad4e;
+// `;
+
+// const StDetailBtnSecond = styled(StDetailBtn)`
+//   background-color: #d9534f;
+// `;
+
+// const StDetailBtnThird = styled(StDetailBtn)`
+//   background-color: #418bca;
+// `;

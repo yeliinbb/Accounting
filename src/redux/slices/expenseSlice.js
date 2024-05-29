@@ -7,16 +7,17 @@ const expenseSlice = createSlice({
   name: "expenseList",
   initialState,
   reducers: {
-    setExpenseList: (state, action) => {
-      // console.log("state0 => ", state);
-      // console.log("action.payload0 => ", action.payload);
-      return [action.payload, ...state];
-    },
+    // setExpenseList: (state, action) => {
+    //   // console.log("state0 => ", state);
+    //   // console.log("action.payload0 => ", action.payload);
+    //   return [...action.payload];
+    // },
     addExpense: (state, action) => {
       state.unshift(action.payload);
       localStorage.setItem("lists", JSON.stringify(state));
       // const add = [action.payload, ...state];
       // localStorage.setItem("lists", JSON.stringify(add));
+      // return add
     },
     updateExpense: (state, action) => {
       const { id, date, item, amount, description } = action.payload;
