@@ -10,6 +10,7 @@ const expenseSlice = createSlice({
     // setExpenseList: (state, action) => {
     //   // console.log("state0 => ", state);
     //   // console.log("action.payload0 => ", action.payload);
+    //   // 새로운 배열을 가져와서 state를 교체해주는 것이기 때문에 return [action.payload, ...state]이 아니라
     //   return [...action.payload];
     // },
     addExpense: (state, action) => {
@@ -17,6 +18,7 @@ const expenseSlice = createSlice({
       localStorage.setItem("lists", JSON.stringify(state));
       // const add = [action.payload, ...state];
       // localStorage.setItem("lists", JSON.stringify(add));
+      // return을 하지 않으면 상태 변경이 되지 않기 때문에 변화가 없던 것
       // return add
     },
     updateExpense: (state, action) => {
