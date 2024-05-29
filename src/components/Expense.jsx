@@ -1,21 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Expense = ({ expense }) => {
   const { id, date, item, amount, description } = expense;
+  const navigate = useNavigate();
   return (
     <>
-      <Link to={`/detail/${id}`}>
-        <StLi>
-          <StLiBox>
-            <StLiBoxH3>{date}</StLiBoxH3>
-            <StLiBoxP>
-              {item} - {description}
-            </StLiBoxP>
-          </StLiBox>
-          <StLiSpan>{`${amount}원`}</StLiSpan>
-        </StLi>
-      </Link>
+      <StLi onClick={() => navigate(`/detail/${id}`)}>
+        <StLiBox>
+          <StLiBoxH3>{date}</StLiBoxH3>
+          <StLiBoxP>
+            {item} - {description}
+          </StLiBoxP>
+        </StLiBox>
+        <StLiSpan>{`${amount}원`}</StLiSpan>
+      </StLi>
     </>
   );
 };
