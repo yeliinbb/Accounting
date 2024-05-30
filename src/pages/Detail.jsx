@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ const Detail = () => {
   const params = useParams();
   // 기존 데이터 가져와서 각각 defaultValue에 넣어주기
   const prevData = expenseList.find((item) => item.id === params.id);
+  const navigate = useNavigate();
 
   // 수정되는 값 반영을 위한 useRef 사용
   const dateRef = useRef(null);
@@ -34,12 +35,14 @@ const Detail = () => {
       description: updatedDescription,
     };
     dispatch(updateExpense(updatedList));
+    navigate("/");
   };
 
   const expenseDelete = () => {
     if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
       dispatch(deleteExpense(prevData));
       localStorage.getItem("filteredByMonth");
+      navigate("/");
     } else {
       alert("삭제가 취소되었습니다.");
     }
@@ -82,19 +85,15 @@ const Detail = () => {
         />
       </StDetailInputBox>
       <StDetailBtnBox>
-        <Link to="/">
-          <StDetailBtn $backgroundColor="#F0AD4E" onClick={expenseUpdate}>
-            Edit
-          </StDetailBtn>
-        </Link>
-        <Link to="/">
-          <StDetailBtn $backgroundColor="#D9534F" onClick={expenseDelete}>
-            Delete
-          </StDetailBtn>
-        </Link>
-        <Link to="/">
-          <StDetailBtn $backgroundColor="#418bca">Back to Home</StDetailBtn>
-        </Link>
+        <StDetailBtn $backgroundColor="#F0AD4E" onClick={expenseUpdate}>
+          Edit
+        </StDetailBtn>
+        <StDetailBtn $backgroundColor="#D9534F" onClick={expenseDelete}>
+          Delete
+        </StDetailBtn>
+        <StDetailBtn $backgroundColor="#418bca" onClick={() => navigate(-1)}>
+          Back to Home
+        </StDetailBtn>
       </StDetailBtnBox>
     </StDetailSection>
   );
@@ -148,7 +147,7 @@ const StDetailBtnBox = styled.div`
 `;
 
 const StDetailBtn = styled.button`
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.$backgroundColor};
   color: #f8f2eb;
   border: 0;
   width: max-content;

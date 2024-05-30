@@ -14,7 +14,7 @@ const expenseSlice = createSlice({
     updateExpense: (state, action) => {
       const { id, date, item, amount, description } = action.payload;
       const updatedExpense = state.find((expense) => expense.id === id);
-      console.log(action.payload);
+
       if (updatedExpense) {
         updatedExpense.date = date;
         updatedExpense.item = item;
