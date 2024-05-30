@@ -4,12 +4,15 @@ import { ExpenseContext } from "../context/ExpenseContext";
 import { useContext } from "react";
 
 const ExpenseListByMonth = () => {
-  const { filteredLists = [] } = useContext(ExpenseContext);
-  // console.log(filteredLists);
+  const { lists, monthFiltered } = useContext(ExpenseContext);
+  const filteredExpense = lists.filter(
+    (list) => new Date(list.date).getMonth() === monthFiltered
+  );
+
   return (
     <StUl>
-      {filteredLists.length > 0 ? (
-        filteredLists.map((list) => <Expense key={list.id} list={list} />)
+      {filteredExpense.length > 0 ? (
+        filteredExpense.map((list) => <Expense key={list.id} list={list} />)
       ) : (
         <StNoExpenseWrapper>
           <StNoExpenseBox>지출이 없습니다.</StNoExpenseBox>

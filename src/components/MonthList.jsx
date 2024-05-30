@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { ExpenseContext } from "../context/ExpenseContext";
 
@@ -18,23 +18,16 @@ const MonthNameList = [
 ];
 
 const MonthsList = () => {
-  const { setMonthFiltered } = useContext(ExpenseContext);
-
-  const [activeIndex, setActiveIndex] = useState(
-    parseInt(localStorage.getItem("filteredByMonth")) || null
-  );
+  const { monthFiltered, setMonthFiltered } = useContext(ExpenseContext);
 
   // useState의 상태가 0이 아닐 경우 로컬스토리지에서 데이터를 가져와서
   // setMonthfiltered에 activeIndex 넣어 화면에 그려주기
   useEffect(() => {
-    if (activeIndex !== 0) {
-      setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
-    }
+    setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
   }, []);
 
   // 클릭했을 때 해당 달 내역만 화면에 보여주기 위해 index 사용
   const handleClick = (index) => {
-    setActiveIndex(index);
     setMonthFiltered(index);
     localStorage.setItem("filteredByMonth", index);
   };
@@ -44,7 +37,7 @@ const MonthsList = () => {
       {MonthNameList.map((month, index) => {
         return (
           <StMonthBox
-            $active={activeIndex === index}
+            $active={monthFiltered === index}
             key={month}
             onClick={() => handleClick(index)}
           >
