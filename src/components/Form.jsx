@@ -33,6 +33,8 @@ const Form = () => {
 
     if (!date || !item || !amount || !description) {
       alert("내용을 모두 입력해주세요.");
+    } else if (parseInt(amount, 10) <= 0) {
+      alert("유효한 금액을 입력해주세요.");
     } else {
       alert("내용이 입력됐습니다.");
       addList(nextList);
