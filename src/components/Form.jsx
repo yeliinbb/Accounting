@@ -45,7 +45,7 @@ const Form = () => {
   return (
     <StFrom onSubmit={onSubmitHandler}>
       <TextInput
-        type="text"
+        type="date"
         htmlFor="date"
         name="date"
         placeholder={`2024-${month}-01`}
