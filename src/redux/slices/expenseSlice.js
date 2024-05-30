@@ -36,7 +36,7 @@ const expenseSlice = createSlice({
       const filtered = state.filter(
         (expense) => new Date(expense.date).getMonth() === action.payload
       );
-      return [...filtered];
+      state = [...filtered];
     },
   },
 });
