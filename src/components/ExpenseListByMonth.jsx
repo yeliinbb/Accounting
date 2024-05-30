@@ -1,22 +1,15 @@
 import styled from "styled-components";
 import Expense from "./Expense";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { filterExpense } from "../redux/slices/expenseSlice";
+import { useSelector } from "react-redux";
 
 const ExpenseListByMonth = () => {
   const expenseList = useSelector((state) => state.expenseList);
   const monthFiltered = useSelector((state) => state.monthFiltered);
-  const dispatch = useDispatch();
 
   // 저장된 데이터 중에서 선택한 달과 맞는 데이터 가져오기 -> getMonth()
   const filtered = expenseList.filter(
     (expense) => new Date(expense.date).getMonth() === monthFiltered
   );
-
-  useEffect(() => {
-    dispatch(filterExpense(monthFiltered));
-  }, []);
 
   return (
     <StUl>

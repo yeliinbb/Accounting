@@ -32,12 +32,6 @@ const expenseSlice = createSlice({
       localStorage.setItem("lists", JSON.stringify(deletedExpenseLists));
       return [...deletedExpenseLists];
     },
-    filterExpense: (state, action) => {
-      const filtered = state.filter(
-        (expense) => new Date(expense.date).getMonth() === action.payload
-      );
-      state = [...filtered];
-    },
   },
 });
 
