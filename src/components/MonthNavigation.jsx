@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const MonthNameList = [
@@ -16,36 +16,31 @@ const MonthNameList = [
   "December",
 ];
 
-const MonthsList = ({ setMonthFiltered }) => {
-  const [activeIndex, setActiveIndex] = useState(
-    parseInt(localStorage.getItem("filteredByMonth")) || null
-  );
-
+const MonthsList = ({ setMonth, month }) => {
   // useState의 상태가 0이 아닐 경우 로컬스토리지에서 데이터를 가져와서
   // setMonthfiltered에 activeIndex 넣어 화면에 그려주기
   useEffect(() => {
-    if (activeIndex !== 0) {
-      setMonthFiltered(parseInt(localStorage.getItem("filteredByMonth")));
+    if (month !== null) {
+      setMonth(parseInt(localStorage.getItem("filteredByMonth")));
     }
   }, []);
 
   // 클릭했을 때 해당 달 내역만 화면에 보여주기 위해 index 사용
   const handleClick = (index) => {
-    setActiveIndex(index);
-    setMonthFiltered(index);
+    setMonth(index);
     localStorage.setItem("filteredByMonth", index);
   };
 
   return (
     <StSection>
-      {MonthNameList.map((month, index) => {
+      {MonthNameList.map((element, index) => {
         return (
           <StMonthBox
-            $active={activeIndex === index}
-            key={month}
+            $active={index === month}
+            key={element}
             onClick={() => handleClick(index)}
           >
-            {month}
+            {element}
           </StMonthBox>
         );
       })}

@@ -1,7 +1,4 @@
-// useNavigate()로 개별 디테일 페이지 이동
-// useParams와 아이디 사용 필요
-
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Expense = ({ list }) => {
@@ -10,12 +7,10 @@ const Expense = ({ list }) => {
 
   return (
     <>
-      {/* <Link to={`/detail/${id}`} state={list}> */}
       <StLi
         onClick={() => {
           navigate(`/detail/${id}`);
         }}
-        state={list}
       >
         <StLiBox>
           <StLiBoxH3>{date}</StLiBoxH3>
@@ -25,7 +20,6 @@ const Expense = ({ list }) => {
         </StLiBox>
         <StLiSpan>{`${amount}원`}</StLiSpan>
       </StLi>
-      {/* </Link> */}
     </>
   );
 };

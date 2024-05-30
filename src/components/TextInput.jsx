@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
-const TextInput = ({ type, htmlFor, name, placeholder }) => {
+const TextInput = ({ type, htmlFor, name, placeholder, handleChange }) => {
   return (
     <StBox>
       <StLabel htmlFor={htmlFor}>{name}</StLabel>
-      <StInput type={type} id={htmlFor} name={name} placeholder={placeholder} />
+      <StInput
+        type={type}
+        id={htmlFor}
+        name={name}
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
     </StBox>
   );
 };

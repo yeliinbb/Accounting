@@ -5,7 +5,9 @@ import Detail from "./pages/Detail";
 import { useEffect, useState } from "react";
 
 const App = () => {
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState(
+    JSON.parse(localStorage.getItem("lists")) || null
+  );
 
   // 컴포넌트가 마운트될 때 로컬스토리지에서 값을 가져오기
   useEffect(() => {
@@ -14,13 +16,6 @@ const App = () => {
     setLists(newLists);
   }, []);
 
-  // // 새로운 리스트를 추가하는 함수
-  const addList = (nextList) => {
-    const updateLists = [nextList, ...lists];
-    setLists(updateLists);
-    localStorage.setItem("lists", JSON.stringify(updateLists));
-  };
-
   return (
     <>
       <GlobalStyle />
@@ -28,9 +23,7 @@ const App = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <Home setLists={setLists} lists={lists} addList={addList} />
-            }
+            element={<Home setLists={setLists} lists={lists} />}
           />
           <Route
             path="/detail/:id"

@@ -1,14 +1,12 @@
 import { useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Detail = ({ lists, setLists }) => {
   // 기존 데이터 가져오기
-  const location = useLocation();
-  const prevData = location.state;
-  // console.log(location);
-  // console.log(lists);
+  const { id } = useParams();
   const navigate = useNavigate();
+  const prevExpense = lists.find((expense) => expense.id === id);
 
   // 유효성 검사를 하려면 useState 동기적 컴포넌트? 사용
   // 수정되는 값 반영을 위한 useRef 사용
@@ -26,7 +24,7 @@ const Detail = ({ lists, setLists }) => {
     const updatedDescription = descriptionRef.current.value;
 
     const updatedList = lists.map((list) =>
-      list.id === prevData.id
+      list.id === id
         ? {
             ...list,
             date: updatedDate,
@@ -43,11 +41,12 @@ const Detail = ({ lists, setLists }) => {
   };
 
   const expenseDelete = () => {
-    const deletedList = lists.filter((list) => list.id !== prevData.id);
+    const deletedList = lists.filter((list) => list.id !== id);
     if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
       setLists(deletedList);
       localStorage.setItem("lists", JSON.stringify(deletedList));
       localStorage.getItem("filteredByMonth");
+      navigate("/");
     } else {
       alert("삭제가 취소되었습니다.");
     }
@@ -64,52 +63,48 @@ const Detail = ({ lists, setLists }) => {
         <StDetailInput
           type="date"
           id="detail-date"
-          defaultValue={prevData.date}
+          defaultValue={prevExpense.date}
           ref={dateRef}
         />
         <StDetailLabel htmlFor="detail-item">Item</StDetailLabel>
         <StDetailInput
           type="text"
           id="detail-item"
-          defaultValue={prevData.item}
+          defaultValue={prevExpense.item}
           ref={itemRef}
         />
         <StDetailLabel htmlFor="detail-amount">Amount</StDetailLabel>
         <StDetailInput
           type="number"
           id="detail-amount"
-          defaultValue={prevData.amount}
+          defaultValue={prevExpense.amount}
           ref={amountRef}
         />
         <StDetailLabel htmlFor="detail-description">Details</StDetailLabel>
         <StDetailInput
           type="text"
           id="detail-description"
-          defaultValue={prevData.description}
+          defaultValue={prevExpense.description}
           ref={descriptionRef}
         />
       </StDetailInputBox>
       <StDetailBtnBox>
-        {/* <Link to="/"> */}
-        <StDetailBtn backgroundcolor="#F0AD4E" onClick={expenseUpdate}>
+        <StDetailBtn $backgroundColor="#F0AD4E" onClick={expenseUpdate}>
           Edit
         </StDetailBtn>
-        {/* </Link> */}
-        <Link to="/">
-          <StDetailBtn backgroundcolor="#D9534F" onClick={expenseDelete}>
-            Delete
-          </StDetailBtn>
-        </Link>
-        {/* <Link to="/"> */}
+
+        <StDetailBtn $backgroundColor="#D9534F" onClick={expenseDelete}>
+          Delete
+        </StDetailBtn>
+
         <StDetailBtn
           onClick={() => {
             navigate(-1);
           }}
-          backgroundcolor="#418bca"
+          $backgroundColor="#418bca"
         >
           Back to Home
         </StDetailBtn>
-        {/* </Link> */}
       </StDetailBtnBox>
     </StDetailSection>
   );
@@ -163,7 +158,7 @@ const StDetailBtnBox = styled.div`
 `;
 
 const StDetailBtn = styled.button`
-  background-color: ${(props) => props.backgroundcolor};
+  background-color: ${(props) => props.$backgroundColor};
   color: #f8f2eb;
   border: 0;
   width: max-content;

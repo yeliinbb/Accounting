@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Expense from "./Expense";
 
-const ExpenseListByMonth = ({ filteredLists = [] }) => {
-  // console.log(filteredLists);
+const ExpenseListByMonth = ({ filteredExpense }) => {
+  // console.log(filteredExpense);
   return (
     <StUl>
-      {filteredLists.length > 0 ? (
-        filteredLists.map((list) => <Expense key={list.id} list={list} />)
+      {filteredExpense.length > 0 ? (
+        filteredExpense.map((list) => <Expense key={list.id} list={list} />)
       ) : (
         <StNoExpenseWrapper>
           <StNoExpenseBox>지출이 없습니다.</StNoExpenseBox>

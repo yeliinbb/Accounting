@@ -1,20 +1,18 @@
 import styled from "styled-components";
 import ExpenseListByMonth from "../components/ExpenseListByMonth";
 import Form from "../components/Form";
-import MonthsList from "../components/MonthList";
-import { useEffect, useState } from "react";
+import MonthNavigation from "../components/MonthNavigation";
+import { useState } from "react";
 
-const Home = ({ lists, setLists, addList }) => {
-  const [monthFiltered, setMonthFiltered] = useState("");
-  const [filteredLists, setFilteredLists] = useState([]);
+const Home = ({ lists, setLists }) => {
   // 저장된 로컬스토리지 lists 데이터 중에서 선택한 달과 맞는 데이터 가져오기 -> getMonth()
+  const [month, setMonth] = useState(
+    parseInt(localStorage.getItem("filteredByMonth")) || null
+  );
 
-  useEffect(() => {
-    const filtered = lists.filter(
-      (list) => new Date(list.date).getMonth() === monthFiltered
-    );
-    setFilteredLists(filtered);
-  }, [lists, monthFiltered]);
+  const filteredExpense = lists.filter(
+    (list) => new Date(list.date).getMonth() === month
+  );
 
   return (
     <>
@@ -22,13 +20,9 @@ const Home = ({ lists, setLists, addList }) => {
         <h1>ACCOUNTING BOOK</h1>
       </header>
       <StMain>
-        <Form
-          setLists={setLists}
-          addList={addList}
-          monthFiltered={monthFiltered}
-        />
-        <MonthsList setMonthFiltered={setMonthFiltered} />
-        <ExpenseListByMonth filteredLists={filteredLists} />
+        <Form setLists={setLists} lists={lists} month={month} />
+        <MonthNavigation month={month} setMonth={setMonth} />
+        <ExpenseListByMonth filteredExpense={filteredExpense} />
       </StMain>
     </>
   );
